@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PhoneBook.DAL\PhoneBook.DAL.csproj" />
+		<ProjectReference Include="..\PhoneBook.DTO\PhoneBook.DTO.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.Result" Version="7.1.0" />
+		<PackageReference Include="EPPlus" Version="6.2.9" />
+		<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="6.1.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.16" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Riok.Mapperly" Version="2.7.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
+		<Folder Include="Services\ErrorService\" />
+		<Folder Include="Validators\RegionDtoValidators\" />
+	</ItemGroup>-->
+	
+</Project>
