@@ -1,4 +1,4 @@
-﻿using FluentValidation.AspNetCore;
+using FluentValidation.AspNetCore;
 using PhoneBook.BLL;
 using PhoneBook.BLL.Helpers;
 using PhoneBook.BLL.Middlewares;
@@ -23,6 +23,8 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    //builder.Environment.WebRootPath = builder.Configuration.GetSection("FileSettings").GetSection("FilePath").Value;
+
     builder.Services.Configure<ApiBehaviorOptions>(options =>
     {
         options.SuppressModelStateInvalidFilter = true;
@@ -36,40 +38,42 @@ try
 
     builder.Services.RegisterServices(builder.Configuration);
 
-    builder.Services.AddControllers(options =>
-    {
-        options.Filters.Add(typeof(ModelStateFeatureFilter));
-    }).AddNewtonsoftJson(options =>
-    {
-        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    }).AddFluentValidation(options =>
-    {
-        options.RegisterValidatorsFromAssembly(typeof(CreateContactDtoValidator).Assembly);
-    });
+    builder.Services.AddControllers();
+    //builder.Services.AddControllers(options =>
+    //{
+    //    options.Filters.Add(typeof(ModelStateFeatureFilter));
+    //}).AddNewtonsoftJson(options =>
+    //{
+    //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    //    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    //}).AddFluentValidation(options =>
+    //{
+    //    options.RegisterValidatorsFromAssembly(typeof(CreateContactDtoValidator).Assembly);
+    //});
 
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen(options =>
-    {
-        options.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "PhoneBook API",
-            Description = "An ASP.NET Core Web API for managing PhoneBook items",
-            TermsOfService = new Uri("https://example.com/terms")
-        });
+    builder.Services.AddSwaggerGen();
+    //builder.Services.AddSwaggerGen(options =>
+    //{
+    //    options.SwaggerDoc("v1", new OpenApiInfo
+    //    {
+    //        Version = "v1",
+    //        Title = "PhoneBook API",
+    //        Description = "An ASP.NET Core Web API for managing PhoneBook items",
+    //        TermsOfService = new Uri("https://example.com/terms")
+    //    });
 
-        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-    });
+    //    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    //});
 
     var app = builder.Build();
 
     await app.DatabaseMigrate();
 
     // Configure the HTTP request pipeline.
-    if (!app.Environment.IsProduction())
+    if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
@@ -96,7 +100,7 @@ try
     app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseRouting();
-
+    app.UseAuthorization();
     app.MapControllers();
 
     app.Run();
