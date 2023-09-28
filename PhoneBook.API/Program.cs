@@ -4,10 +4,8 @@ using PhoneBook.BLL.Helpers;
 using PhoneBook.BLL.Middlewares;
 using PhoneBook.BLL.Validators.ContactDtoValidators;
 using PhoneBook.DAL;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -54,26 +52,6 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(options =>
     {
-        options.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
-        {
-            Description = "ApiKey must appear in header",
-            Type = SecuritySchemeType.ApiKey,
-            Name = "Authorization",
-            In = ParameterLocation.Header,
-            Scheme = "ApiKeyScheme"
-        });
-        var key = new OpenApiSecurityScheme()
-        {
-            Reference = new OpenApiReference
-            {
-                Type = ReferenceType.SecurityScheme,
-                Id = "ApiKey"
-            },
-            In = ParameterLocation.Header
-        };
-        var requirement = new OpenApiSecurityRequirement { { key, new List<string>() } };
-        options.AddSecurityRequirement(requirement);
-
         options.SwaggerDoc("v1", new OpenApiInfo
         {
             Version = "v1",
@@ -118,7 +96,6 @@ try
     app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseRouting();
-    app.UseAuthentication();
 
     app.MapControllers();
 
