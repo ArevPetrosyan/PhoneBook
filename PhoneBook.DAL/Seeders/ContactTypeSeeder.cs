@@ -11,6 +11,7 @@ namespace PhoneBook.DAL.Seeders
             {
                 Id = 1,
                 IsDeleted = false,
+                CreatedDate = DateTime.UtcNow,
                 Name = "Person"
             });
 
@@ -18,6 +19,7 @@ namespace PhoneBook.DAL.Seeders
             {
                 Id = 2,
                 IsDeleted = false,
+                CreatedDate = DateTime.UtcNow,
                 Name = "Private organization"
             });
 
@@ -25,6 +27,7 @@ namespace PhoneBook.DAL.Seeders
             {
                 Id = 3,
                 IsDeleted = false,
+                CreatedDate = DateTime.UtcNow,
                 Name = "Public organization"
             });
         }
