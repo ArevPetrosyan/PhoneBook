@@ -54,20 +54,7 @@ try
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    //builder.Services.AddSwaggerGen(options =>
-    //{
-    //    options.SwaggerDoc("v1", new OpenApiInfo
-    //    {
-    //        Version = "v1",
-    //        Title = "PhoneBook API",
-    //        Description = "An ASP.NET Core Web API for managing PhoneBook items",
-    //        TermsOfService = new Uri("https://example.com/terms")
-    //    });
-
-    //    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    //    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-    //});
-
+    
     var app = builder.Build();
 
     await app.DatabaseMigrate();

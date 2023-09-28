@@ -8,11 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.Development.json" />
-	  <None Remove="appsettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Include="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -25,10 +20,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\PhoneBool.BLL\PhoneBook.BLL.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Update="appsettings.*.json" CopyToPublishDirectory="Never" />
 	</ItemGroup>
 
 </Project>
