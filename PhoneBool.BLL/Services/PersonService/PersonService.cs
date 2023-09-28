@@ -1,16 +1,12 @@
 ﻿using Ardalis.Result;
 using Microsoft.EntityFrameworkCore;
+using PhoneBook.BLL.Filters;
 using PhoneBook.BLL.Mappers;
 using PhoneBook.BLL.Services.ContactService;
 using PhoneBook.DAL;
 using PhoneBook.DAL.Models;
 using PhoneBook.DTO.ContactDtos;
 using PhoneBook.DTO.PersonDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.BLL.Services.PersonService
 {
@@ -56,6 +52,17 @@ namespace PhoneBook.BLL.Services.PersonService
             await _db.SaveChangesAsync();
 
             return Result.Success();
+        }
+
+        public async Task<PagedResult<List<PersonDto>>> GetAll(PersonFilter filter)
+        {
+            var query = _db.Persons
+                 .Include(x => x.Contact)
+                 .AsQueryable();
+
+            var entities = await filter.FilterObjects(query).ToListAsync();
+
+            return new PagedResult<List<PersonDto>>(await filter.GetPagedInfoAsync(query), entities.MapToPersonDtos());
         }
 
         public async Task<Result<PersonDto>> GetById(long id)

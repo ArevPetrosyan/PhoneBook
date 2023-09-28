@@ -25,8 +25,6 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Environment.WebRootPath = builder.Configuration.GetSection("FileSettings").GetSection("FilePath").Value;
-
     builder.Services.Configure<ApiBehaviorOptions>(options =>
     {
         options.SuppressModelStateInvalidFilter = true;
@@ -114,17 +112,13 @@ try
         {
             ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
             ctx.Context.Response.Headers.Append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
-        },
-        FileProvider = new PhysicalFileProvider(builder.Configuration.GetSection("FileSettings").GetSection("FilePath").Value)
+        }
     });
 
     app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseRouting();
     app.UseAuthentication();
-    app.UseAuthorization();
-
-    app.UseMiddleware<AuthorizationMiddleware>();
 
     app.MapControllers();
 

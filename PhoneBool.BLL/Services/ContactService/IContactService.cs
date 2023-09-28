@@ -1,12 +1,6 @@
 ﻿using Ardalis.Result;
 using PhoneBook.BLL.Filters;
 using PhoneBook.DTO.ContactDtos;
-using PhoneBook.DTO.PersonDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.BLL.Services.ContactService
 {

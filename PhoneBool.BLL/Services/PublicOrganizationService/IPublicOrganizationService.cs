@@ -1,10 +1,6 @@
 ﻿using Ardalis.Result;
+using PhoneBook.BLL.Filters;
 using PhoneBook.DTO.PublicOrganizationDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.BLL.Services.PublicOrganizationService
 {
@@ -14,5 +10,6 @@ namespace PhoneBook.BLL.Services.PublicOrganizationService
         Task<Result> Update(UpdatePublicOrganizationDto publicOrganization);
         Task<Result<PublicOrganizationDto>> GetById(long id);
         Task<Result> Delete(DeletePublicOrganizationDto publicOrganization);
+        Task<PagedResult<List<PublicOrganizationDto>>> GetAll(PublicOrganizationFilter filter);
     }
 }

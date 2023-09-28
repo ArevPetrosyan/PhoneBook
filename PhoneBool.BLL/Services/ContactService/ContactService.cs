@@ -1,18 +1,10 @@
 ﻿using Ardalis.Result;
 using PhoneBook.DAL;
 using PhoneBook.DTO.ContactDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PhoneBook.DAL.Models;
 using PhoneBook.BLL.Mappers;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Contracts;
 using PhoneBook.BLL.Filters;
-using System.Reflection.Metadata;
-using PhoneBook.Shared;
 
 namespace PhoneBook.BLL.Services.ContactService
 {
