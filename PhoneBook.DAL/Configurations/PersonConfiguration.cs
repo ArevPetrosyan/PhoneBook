@@ -4,7 +4,7 @@ using PhoneBook.DAL.Models;
 
 namespace PhoneBook.DAL.Configurations
 {
-    public class PersonContactConfiguration : BaseConfiguration<Person>
+    public class PersonConfiguration : BaseConfiguration<Person>
     {
         public override void Configure(EntityTypeBuilder<Person> builder)
         {

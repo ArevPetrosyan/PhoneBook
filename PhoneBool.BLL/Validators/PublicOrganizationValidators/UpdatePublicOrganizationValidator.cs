@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using PhoneBook.DTO.PublicOrganizationDtos;
+using PhoneBook.Shared;
 
 namespace PhoneBook.BLL.Validators.PublicOrganizationValidators
 {
@@ -20,6 +21,7 @@ namespace PhoneBook.BLL.Validators.PublicOrganizationValidators
                 .MaximumLength(100);
 
             RuleFor(x => x.PhoneNumber)
+                .Matches(ValidationConstants.PhoneValidation)
                 .NotEmpty()
                 .MaximumLength(100);
 
